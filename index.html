@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Juego Secreto 🎮</h1>
+        <div class="usercontainer">
+            <!-- Campos para que el usuario ingrese el rango de números a jugar -->
+            <p>Elige un rango de números, el número de intentos e inicia el juego.</p> 
+            <div>
+                <p class="inline">Ingresa el N° mínimo:</p><input type="number" id="minNumber" placeholder="Enter min number" min="1"> 
+                <p class="inline">Ingresa el N° máximo:</p><input type="number" id="maxNumber" placeholder="Enter max number" max="1000">
+            </div>
+            <div>
+                <p class="inline">Número de intentos:</p><input type="number" id="attemptsNumber" placeholder="Enter attempts">
+            <button id="startBtn">Empieza a Jugar</button>
+            </div>
+        </div>
+        <!-- Juego de adivinanza -->
+        <!-- <p id="instrucciones"></p> -->
+        <p>Elige un número y adivina el número secreto. Tienes <input type="attempts" id="attempts" placeholder="Número de intentos" min="1"><p> intentos.</p>
+        <div class="inputClass">
+            <input id="inputNumber" placeholder="Enter a number"></div>
+        
+        <button id="guessBtn">Adivinar</button>
+        <button id="restartBtn">Vuelve a Jugar!</button>
+        <p id="message"></p>
+        <p id="attempts"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

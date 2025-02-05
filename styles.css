@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    background-image: url('img/code.png');
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* padding: 20px; */
+    height: 100vh;
+    /* margin: 30px; */
+}
+
+.container {
+    background-color: #f0f6f6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+
+}
+.usercontainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align:inherit;
+}
+
+h1 {
+    color: #333;
+
+}
+
+input[type="number"] {
+    padding: 10px;
+    font-size: 14px;
+    width: 15%;
+    margin: 10px 40px 10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.inline {
+    display: inline-block;
+    margin-right: 40px; 
+}
+
+.inputClass {
+    margin: 10px 20px;
+}
+
+#inputNumber {
+    
+    padding: 10px;
+    font-size: 14px;
+    width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#message {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#attempts {
+    /* color: #666; */
+    border-color: none;
+    background-color: none;
+}
+
+
+
