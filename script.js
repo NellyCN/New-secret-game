@@ -6,10 +6,12 @@
 
 // Paso1: Configuración inicial del juego
 
-// Declaramos Variables
-let secretNumber = Math.floor(Math.random()*1000)+1;  // Nro aleatorio del 1 al 10
-let attempts = 6;   // Nro de intentos
-let guessed = false; // Bolean si el jugador ha adivinado o no el nro.
+// Declaramos Variables globales
+let secretNumber;
+let guessed;
+let minRange;
+let maxRange;
+let attempts;
 
 // Elementos de la interfaz
 const minNumber = document.getElementById("minNumber");
@@ -18,7 +20,7 @@ const attemptsNumber = document.getElementById("attemptsNumber")
 const inputNumber = document.getElementById("inputNumber"); // Input del nro. a ingresar
 const startBtn = document.getElementById("startBtn");
 const guessBtn = document.getElementById("guessBtn"); // Botón adivinar
-const resetBtn = document.getElementById("resetBtn");   // Botón reiniciar
+// const resetBtn = document.getElementById("resetBtn");   // Botón reiniciar
 const message = document.getElementById("message"); // Mensaje de respuesta
 const textAttempts = document.getElementById("attempts"); // Nro. de intentos restantes
 const restartBtn = document.getElementById("restartBtn"); // Botón reiniciar
@@ -26,12 +28,7 @@ const winSound = new Audio("sounds/applause.mp3");
 const failSound = new Audio("sounds/fail.mp3");
 const clickSound = new Audio("sounds/mouse-click.mp3");
 
-// Actualizar los intentos restantes
-textAttempts.textContent = `Intentos restantes: ${attempts}`;
-
-
 // Paso2: Funcionalidad del botón Empieza a Jugar
-
 startBtn.addEventListener("click", () => {
     // Obtener el rango máximo ingresado por el usuario
     minRange = parseInt(minNumber.value)
@@ -39,14 +36,24 @@ startBtn.addEventListener("click", () => {
     attempts = parseInt(attemptsNumber.value);
 
     // Validar que el rango máximo sea un número válido
-    if (isNaN(minRange) || minRange < 1 & isNaN(maxRange) || maxRange > 1000 & isNaN(attemptsNumber) || attemptsNumber > 0) {
+    if (isNaN(minRange) || isNaN(maxRange) || isNaN(attempts) || minRange < 1 || maxRange > 1000 || attempts < 1 || minRange >= maxRange) {
         alert("Por favor, ingresa un rango de números válido (mayor que 0 y menor a 1000).");
         return;
     }
 
-    // Inicializar el juego
+    // Generar el número secreto dentro del rango del usuario
+    secretNumber = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;  
+    guessed = false; // Bolean si el jugador ha adivinado o no el nro.
 
+    // Mostrar instrucciones
+    instrucciones.textContent = `Adivina un número entre ${minRange} y ${maxRange}. Tienes ${attempts} intentos.`;
+    textAttempts.textContent = `Intentos restantes: ${attempts}`;  // Actualizar los intentos restantes
 
+    // Deshabilitar campos de entrada y el botón de adivinar
+    minNumber.disabled = true;
+    maxNumber.disabled = true;
+    attemptsNumber.disabled = true;
+    
 });
 
 
@@ -62,8 +69,8 @@ guessBtn.addEventListener("click", () => {
     const numberEntered = parseInt(inputNumber.value);
 
     // Validar que el número esté en el rango correcto
-    if (isNaN(numberEntered) || numberEntered < minNumber || numberEntered > maxNumber) {
-            message.textContent = `Por favor, ingresa un número válido entre ${minNumber} y ${maxNumber}!`;
+    if (isNaN(numberEntered) || numberEntered < minRange || numberEntered > maxRange) {
+            message.textContent = `Por favor, ingresa un número válido entre ${minRange} y ${maxRange}!`;
         message.style.color = "purple";
         return;
     }
@@ -93,53 +100,31 @@ guessBtn.addEventListener("click", () => {
     }
 
     // Limpiar el input de entrada
-    // inputNumber.value = "";
-});
-
-// Paso3: Funcionalidad del botón "Reiniciar"
-
-restartBtn.addEventListener("click", () => {
-    clickSound.play();
-    // Restablecer las variables
-    secretNumber = Math.floor(Math.random()*1000)+1;
-    attempts = 6;
-    guessed = false;
-
-    // Actualizar la interfaz
-    textAttempts.textContent = `Intentos restantes: ${attempts}`;
-    message.textContent = "";
     inputNumber.value = "";
 });
 
+// Paso3: Funcionalidad del botón "Reiniciar"
+restartBtn.addEventListener("click", () => {
+    clickSound.play();
 
+    // Restablecer las variables
+    secretNumber = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+    attempts = parseInt(attemptsNumber.value); // Restablecer los intentos
+    guessed = false;
 
+    // Actualizar la interfaz
+    inputNumber.value = "";
+    minNumber.value = "";
+    maxNumber.value = "";
+    attemptsNumber.value = "";
+    message.textContent = "";
+    textAttempts.textContent = "";
+    instrucciones.textContent = "";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // Habilitar el campo de entrada y el botón de adivinar
+    inputNumber.disabled = false;
+    guessBtn.disabled = false;
+    minNumber.disabled = false;
+    maxNumber.disabled = false;
+    attemptsNumber.disabled = false;
+});
